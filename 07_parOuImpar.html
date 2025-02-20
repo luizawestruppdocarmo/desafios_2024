@@ -3,6 +3,9 @@
     /* 
     Criar uma função parOuImpar(numero) que exibe se o número é par ou ímpar, que será informado pelo usuário.
     */
-
-    
+    let num = Number(prompt(`Digite um número:`));
+    function parOuImpar(num) {
+        return num % 2 === 0 ? "par" : "ímpar";
+    }
+   alert(`${num} é ${parOuImpar(num)}`);
 </script>
