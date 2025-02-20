@@ -1,15 +1,44 @@
 <script>
-    const alunos = [
-        { nome: "Ana", notas: [7, 8, 9] },
-        { nome: "Carlos", notas: [5, 6, 4] },
-        { nome: "Bruna", notas: [9, 9, 10] }
-    ];
     /*
     1. Criar uma função calcularMedia(nome) que retorna a média de um aluno.
     2. Criar uma função classificarAluno(nome) que retorna "Aprovado", "Recuperação" ou "Reprovado" com base na média.
     3. Criar uma função adicionarNota(nome, nota) para incluir mais notas ao aluno.
     4. Criar um menu interativo para buscar alunos, adicionar notas e verificar médias.
     */
-
-    
+    const alunos = [
+        { nome: "Ana", notas: [7, 8, 9] },
+        { nome: "Carlos", notas: [5, 6, 4] },
+        { nome: "Bruna", notas: [9, 9, 10] }
+    ];
+    function calcularMedia(nome) {
+        const aluno = alunos.find(a => a.nome === nome);
+        return aluno ? aluno.notas.reduce((soma, nota) => soma + nota, 0) / aluno.notas.length : null;
+    }
+    function classificarAluno(nome) {
+        const media = calcularMedia(nome);
+        return media === null ? "Aluno não encontrado." : (media >= 7 ? "Aprovado" : media >= 5 ? "Recuperação" : "Reprovado");
+    }
+    function adicionarNota(nome, nota) {
+        const aluno = alunos.find(a => a.nome === nome);
+        if (aluno) {
+            aluno.notas.push(nota);
+            return "Nota adicionada.";
+        }
+        return "Aluno não encontrado.";
+    }
+    let opcao;
+    while (opcao !== "0") {
+        opcao = prompt("1 - Média\n2 - Classificação\n3 - Adicionar nota\n0 - Sair");
+        if (opcao === "1") {
+            const nome = prompt("Nome do aluno:");
+            alert(`Média: ${calcularMedia(nome)}`);
+        } else if (opcao === "2") {
+            const nome = prompt("Nome do aluno:");
+            alert(classificarAluno(nome));
+        } else if (opcao === "3") {
+            const nome = prompt("Nome do aluno:");
+            const nota = Number(prompt("Digite a nota:"));
+            alert(adicionarNota(nome, nota));
+        }
+    }
 </script>
