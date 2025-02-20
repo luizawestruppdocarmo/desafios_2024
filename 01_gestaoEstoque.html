@@ -13,6 +13,37 @@
     4. Criar uma função calcularValorTotalEstoque() que retorna o valor total dos produtos no estoque.
     5. Criar um menu (switch case) para o usuário escolher ações repetidamente (entre as funções desenvolvidas) até decidir sair (opção para sair - 0).
     */
-
-
+    function buscarProduto(nome) {
+        return estoque.find(p => p.nome.toLowerCase() === nome.toLowerCase()) || "Produto não encontrado.";
+    }
+    function adicionarEstoque(id, qtd) {
+        const produto = estoque.find(p => p.id === id);
+        if (produto) {
+            produto.quantidade += qtd;
+            return `Estoque do ${produto.nome} aumentado.`;
+        }
+        return "Produto não encontrado.";
+    }
+    function venderProduto(id, qtd) {
+        const produto = estoque.find(p => p.id === id);
+        if (produto) {
+            if (qtd <= produto.quantidade) {
+                produto.quantidade -= qtd;
+                return `Venda: ${qtd} de ${produto.nome}.`;
+            }
+            return "Quantidade insuficiente.";
+        }
+        return "Produto não encontrado.";
+    }
+    function calcularValorTotalEstoque() {
+        return estoque.reduce((total, p) => total + p.preco * p.quantidade, 0);
+    }
+    let opcao;
+    while (opcao !== "0") {
+        opcao = prompt("1 - Buscar\n2 - Adicionar\n3 - Vender\n4 - Valor Total\n0 - Sair");
+        if (opcao === "1") alert(JSON.stringify(buscarProduto(prompt("Nome:")), null, 2));
+        else if (opcao === "2") alert(adicionarEstoque(Number(prompt("ID:")), Number(prompt("Quantidade:"))));
+        else if (opcao === "3") alert(venderProduto(Number(prompt("ID:")), Number(prompt("Quantidade:"))));
+        else if (opcao === "4") alert(`Total: R$ ${calcularValorTotalEstoque()}`);
+    }
 </script>
