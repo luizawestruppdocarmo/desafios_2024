@@ -1,12 +1,27 @@
 <script>
-    const temperaturas = [22, 25, 19, 30, 28, 24, 27];
     //Problema: Temperaturas
     /*
     1. Criar uma função calcularMedia(temperaturas) para retornar a temperatura média.
     2. Criar uma função encontrarMaisQuente(temperaturas) para retornar a maior temperatura registrada.
     3. Criar uma função encontrarMaisFria(temperaturas) para retornar a menor temperatura registrada.
     4. Criar um loop (while) para exibir um menu e permitir ao usuário escolher uma opção até decidir sair (opção 0).
-    */
-
-    
+    */ 
+    const temperaturas = [22, 25, 19, 30, 28, 24, 27];
+    function calcularMedia(temps) {
+        return temps.reduce((soma, temp) => soma + temp, 0) / temps.length;
+    }
+    function encontrarMaisQuente(temps) {
+        return Math.max(...temps);
+    }
+    function encontrarMaisFria(temps) {
+        return Math.min(...temps);
+    }
+    let opcao;
+    while (opcao !== "0") {
+        opcao = prompt("1 - Média\n2 - Mais quente\n3 - Mais fria\n0 - Sair");
+        if (opcao === "1") alert(`Média: ${calcularMedia(temperaturas)}°C`);
+        else if (opcao === "2") alert(`Mais quente: ${encontrarMaisQuente(temperaturas)}°C`);
+        else if (opcao === "3") alert(`Mais fria: ${encontrarMaisFria(temperaturas)}°C`);
+        else if (opcao !== "0") alert("Opção inválida!");
+    }
 </script>
