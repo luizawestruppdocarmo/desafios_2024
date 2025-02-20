@@ -12,6 +12,34 @@
     4. Criar uma função calcularFaturamento() que soma o valor de todas as reservas feitas.
     5. Criar um loop (while) para o usuário interagir com as opções até escolher sair (opção 0).
     */
-
-    
+    function listarQuartosDisponiveis() {
+        return quartos.filter(q => q.disponivel).map(q => `Quarto ${q.numero}`).join(", ") || "Nenhum quarto disponível.";
+    }
+    function reservarQuarto(numero) {
+        const quarto = quartos.find(q => q.numero === numero);
+        if (quarto && quarto.disponivel) {
+            quarto.disponivel = false;
+            return `Quarto ${numero} reservado.`;
+        }
+        return `Quarto ${numero} não disponível.`;
+    }
+    function cancelarReserva(numero) {
+        const quarto = quartos.find(q => q.numero === numero);
+        if (quarto && !quarto.disponivel) {
+            quarto.disponivel = true;
+            return `Reserva do quarto ${numero} cancelada.`;
+        }
+        return `Quarto ${numero} não está reservado.`;
+    }
+    function calcularFaturamento() {
+        return quartos.filter(q => !q.disponivel).reduce((total, q) => total + q.preco, 0);
+    }
+    let opcao;
+    while (opcao !== "0") {
+        opcao = prompt("1 - Listar quartos disponíveis\n2 - Reservar quarto\n3 - Cancelar reserva\n4 - Calcular faturamento\n0 - Sair");
+        if (opcao === "1") alert(listarQuartosDisponiveis());
+        else if (opcao === "2") alert(reservarQuarto(Number(prompt("Número do quarto:"))));
+        else if (opcao === "3") alert(cancelarReserva(Number(prompt("Número do quarto:"))));
+        else if (opcao === "4") alert(`Faturamento: R$ ${calcularFaturamento()}`);
+    }
 </script>
