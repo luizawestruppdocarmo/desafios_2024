@@ -1,12 +1,62 @@
 <script>
-    let listaCompras = ["Arroz", "Feijão", "Leite"];
     //Problema: Lista de Compras
     /*
     1. Criar uma função adicionarItem(item) que adiciona um novo item à lista.
     2. Criar uma função removerItem(item) que remove um item da lista se ele existir.
     3. Criar uma função listarItens() que exibe todos os itens da lista.
-    4. Criar um loop(while) para permitir ao usuário interagir com as opções até escolher sair.
+    4. Criar um loop(while) para permitir ao usuário interagir com as opções até escolher sair
     */
-    
-    
+    let listaCompras = ["Arroz", "Feijão", "Leite"];
+    function adicionarItem(item) {
+        if (item.trim() === "") {
+            alert("O item não pode estar vazio!");
+            return;
+        }
+        listaCompras.push(item);
+        alert(`"${item}" foi adicionado à lista.`);
+    }
+    function removerItem(item) {
+        let index = listaCompras.indexOf(item);
+        if (index !== -1) {
+            listaCompras.splice(index, 1);
+            alert(`"${item}" foi removido da lista.`);
+        } else {
+            alert(`"${item}" não encontrado na lista.`);
+        }
+    }
+    function listarItens() {
+        if (listaCompras.length === 0) {
+            alert("A lista está vazia.");
+        } else {
+            alert("Itens na lista:\n" + listaCompras.join("\n"));
+        }
+    }
+    let opcao;
+    while (opcao !== "4") {
+        opcao = prompt(
+            "Escolha uma opção:\n" +
+            "1 - Adicionar item\n" +
+            "2 - Remover item\n" +
+            "3 - Listar itens\n" +
+            "4 - Sair"
+        );
+        switch (opcao) {
+            case "1":
+                let novoItem = prompt("Digite o item que deseja adicionar:");
+                adicionarItem(novoItem);
+                break;
+            case "2":
+                let itemRemover = prompt("Digite o item que deseja remover:");
+                removerItem(itemRemover);
+                break;
+            case "3":
+                listarItens();
+                break;
+            case "4":
+                alert("Saindo do programa...Programa Encerrado.");
+                break;
+            default:
+                alert("Opção inválida! Escolha um número de 1 a 4.");
+        }
+    }
 </script>
